@@ -1,0 +1,60 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{slide}[2016/03/14 My custom slide class]
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{geometry}
+\RequirePackage{lipsum}
+\RequirePackage{tikz}
+\RequirePackage{framed}
+\geometry{
+    paper=a5paper,
+    landscape
+}
+
+
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+
+
+\renewcommand{\section}[1]{
+    \clearpage
+    \vspace*{\fill}
+    \begin{center}
+    \Huge\textsc{#1}
+    \end{center}
+    \vfill
+}
+
+\newcommand{\slideheading}[1]{
+{{\flushleft\Huge\textsc{#1}}}\hfill \break}%\par\noindent{}}
+
+\newenvironment{slide}[1][]{
+    \clearpage
+    \if\relax\detokenize{#1}\relax
+        
+    \else
+        \noindent{}
+        \slideheading{#1}
+    \fi
+    \vspace*{\fill}%
+    \par\noindent{}%
+}{
+    \vfill 
+}
+
+
+\newenvironment{slidemaximus}[1][]{
+    \clearpage
+    \newgeometry{left=0.5cm,bottom=0.5cm,top=0.5cm,right=0.5cm}
+    \if\relax\detokenize{#1}\relax
+        
+    \else
+        \noindent{}
+        \slideheading{#1}
+    \fi
+    \vspace*{\fill}%
+    \par\noindent{}%
+}{
+    \vfill 
+    \restoregeometry
+}

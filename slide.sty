@@ -7,6 +7,7 @@
 \RequirePackage{lipsum}
 \RequirePackage{tikz}
 \RequirePackage{framed}
+\RequirePackage{mathtools}
 \geometry{
     paper=a5paper,
     landscape
@@ -24,6 +25,25 @@
     \end{center}
     \vfill
 }
+
+\newcount\partcounter
+\partcounter 1\relax
+
+\renewcommand{\part}[1]{
+    \clearpage
+    \vspace*{\fill}
+    \begin{center}
+    \textsc{Part~}\the\partcounter\\
+      \begin{shaded}
+        \vspace{20pt}
+        \Huge\textsc{#1}
+        \vspace{20pt}
+      \end{shaded}
+    \end{center}
+    \vfill
+    \advance\partcounter 1\relax
+}
+
 
 \newcommand{\slideheading}[1]{
 {{\flushleft\Huge\textsc{#1}}}\hfill \break}%\par\noindent{}}

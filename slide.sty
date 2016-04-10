@@ -9,8 +9,8 @@
 \RequirePackage{framed}
 \RequirePackage{mathtools}
 \geometry{
-    paper=a5paper,
-    landscape
+  paper=a5paper,
+  landscape
 }
 
 
@@ -18,12 +18,12 @@
 
 
 \renewcommand{\section}[1]{
-    \clearpage
-    \vspace*{\fill}
-    \begin{center}
+  \clearpage
+  \vspace*{\fill}
+  \begin{center}
     \Huge\textsc{#1}
-    \end{center}
-    \vfill
+  \end{center}
+  \vfill
 }
 
 \newcount\partcounter
@@ -49,32 +49,32 @@
 {{\flushleft\Huge\textsc{#1}}}\hfill \break}%\par\noindent{}}
 
 \newenvironment{slide}[1][]{
-    \clearpage
-    \if\relax\detokenize{#1}\relax
-        
-    \else
-        \noindent{}
-        \slideheading{#1}
-    \fi
-    \vspace*{\fill}%
-    \par\noindent{}%
+  \clearpage
+  \if\relax\detokenize{#1}\relax
+      
+  \else
+    \noindent{}
+    \slideheading{#1}
+  \fi
+  \vspace*{\fill}%
+  \par\noindent{}%
 }{
-    \vfill 
+  \vfill 
 }
 
 
 \newenvironment{slidemaximus}[1][]{
-    \clearpage
-    \newgeometry{left=0.5cm,bottom=0.5cm,top=0.5cm,right=0.5cm}
-    \if\relax\detokenize{#1}\relax
-        
-    \else
-        \noindent{}
-        \slideheading{#1}
-    \fi
-    \vspace*{\fill}%
-    \par\noindent{}%
+  \clearpage
+  \newgeometry{left=0.5cm,bottom=0.5cm,top=0.5cm,right=0.5cm}
+  \if\relax\detokenize{#1}\relax
+      
+  \else
+    \noindent{}
+    \slideheading{#1}
+  \fi
+  \vspace*{\fill}%
+  \par\noindent{}%
 }{
-    \vfill 
-    \restoregeometry
+  \vfill 
+  \restoregeometry
 }

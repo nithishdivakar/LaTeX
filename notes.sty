@@ -1,0 +1,79 @@
+%This file is part of the git repo  LaTeX and 
+%is probably hard linked to this repo. Make 
+%sure any changes made to it is  reflected 
+%there as well
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{notes}[2016/03/14 My custom notes class]
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{geometry}
+\RequirePackage{lipsum}
+\RequirePackage{tikz}
+\RequirePackage{framed}
+\RequirePackage{mathtools}
+\RequirePackage{pgffor}
+\RequirePackage{hyperref}
+
+\RequirePackage{geometry}
+\geometry{
+  paper=a4paper,
+  %total={4in, 9.5in},
+  left=1in,
+  top=1in,
+}
+
+\setlength{\marginparwidth}{1.5in}
+\setlength{\marginparsep}{0.3in}
+\setlength{\textwidth}{5in}
+
+
+
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+
+
+
+\newcount\partcounter
+\partcounter 1\relax
+
+
+
+
+\def\filename#1#2#3{%
+  #1#2#3/#1#2#3.tex
+}
+
+%remove "contents" on top of toc
+\renewcommand{\contentsname}{}
+
+
+%include all notes in reverse order- from present to past. 
+% older ntoes are backwards
+% newre ones are in front
+\def\pagesofnotes{
+  \foreach \year in {2020,...,2000}{
+    \foreach \month in {Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec}{
+      \foreach \day in {31,...,1}{
+        \def\D{\ifnum\day<10 0\fi\day}
+        \def\notedate{\month~\day,~\year}
+        \IfFileExists{\filename{\year}{\month}{\D}}{
+          \input{\filename{\year}{\month}{\D}}
+        }{
+           %\filename{\year}{\month}{\D}
+        }
+  }}}
+}
+
+% new note command.
+\def\newnote#1{
+  \newpage
+  \addtocounter{chapter}{1}
+  \addcontentsline{toc}{chapter}{\notedate: #1}
+  \noindent\parbox[t][][t]{6.8in}{%
+    \textsc{\LARGE #1}
+    \par
+    \noindent\hfill\texttt{\notedate}
+  }
+  \vspace{30pt}
+  \newline
+}

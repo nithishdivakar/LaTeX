@@ -13,16 +13,39 @@
 \RequirePackage{tikz}
 \RequirePackage{framed}
 \RequirePackage{mathtools}
+\RequirePackage{hyperref}
 \geometry{
   paper=a5paper,
   landscape
 }
 
-
 \definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
 
+%\renewcommand{\contentsname}{}
+\setcounter{part}{1}
+
+\renewcommand{\thesection}{\arabic{section}}
+
+\renewcommand{\part}[1]{
+    \addcontentsline{toc}{part}{\thepart~#1}
+    \clearpage
+    \vspace*{\fill}
+    \begin{center}
+    \textsc{Part~}\thepart\\
+      \begin{shaded}
+        \vspace{20pt}
+        \Huge\textsc{#1}
+        \vspace{20pt}
+      \end{shaded}
+    \end{center}
+    \vfill
+    \addtocounter{part}{1}
+    \setcounter{section}{1}
+}
 
 \renewcommand{\section}[1]{
+  \addcontentsline{toc}{section}{\thesection~#1}
+  \addtocounter{section}{1}
   \clearpage
   \vspace*{\fill}
   \begin{center}
@@ -31,23 +54,6 @@
   \vfill
 }
 
-\newcount\partcounter
-\partcounter 1\relax
-
-\renewcommand{\part}[1]{
-    \clearpage
-    \vspace*{\fill}
-    \begin{center}
-    \textsc{Part~}\the\partcounter\\
-      \begin{shaded}
-        \vspace{20pt}
-        \Huge\textsc{#1}
-        \vspace{20pt}
-      \end{shaded}
-    \end{center}
-    \vfill
-    \advance\partcounter 1\relax
-}
 
 
 \newcommand{\slideheading}[1]{
@@ -55,16 +61,19 @@
 
 \newenvironment{slide}[1][]{
   \clearpage
+  %\newgeometry{left=2cm,bottom=2cm,top=2cm,right=2cm}
   \if\relax\detokenize{#1}\relax
-      
+
   \else
+ %   \addcontentsline{toc}{subsection}{#1}
     \noindent{}
     \slideheading{#1}
   \fi
   \vspace*{\fill}%
   \par\noindent{}%
 }{
-  \vfill 
+  \vfill
+  %\restoregeometry
 }
 
 

@@ -20,8 +20,43 @@
 }
 
 \definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
-
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 %\renewcommand{\contentsname}{}
+
+%%%%
+%make vertical offset of ``ocntents'' go away
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{0\p@}%vertical offset
+    {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+          \large \bfseries \@chapapp\space \thechapter
+          \par\nobreak
+          \vskip 0\p@
+        \fi
+    \fi
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 0\p@
+  }}
+  \def\@makeschapterhead#1{%
+    \vspace*{0\p@}%vertical offset
+  {\parindent \z@ \raggedright
+      \normalfont
+      \interlinepenalty\@M
+      \large \bfseries  #1\par\nobreak
+      \vskip 0\p@
+    }}
+\makeatother
+%%%%%
+
+
+
+
+
+
+
 \setcounter{part}{1}
 
 \renewcommand{\thesection}{\arabic{section}}
@@ -59,13 +94,15 @@
 \newcommand{\slideheading}[1]{
 {{\flushleft\Huge\textsc{#1}}}\hfill \break}%\par\noindent{}}
 
-\newenvironment{slide}[1][]{
+
+
+\newenvironment{slidebase}[2][]{
   \clearpage
-  %\newgeometry{left=2cm,bottom=2cm,top=2cm,right=2cm}
+  \newgeometry{left=#2,bottom=#2,top=#2,right=#2}
   \if\relax\detokenize{#1}\relax
 
   \else
- %   \addcontentsline{toc}{subsection}{#1}
+    \addcontentsline{toc}{subsection}{#1}
     \noindent{}
     \slideheading{#1}
   \fi
@@ -73,22 +110,15 @@
   \par\noindent{}%
 }{
   \vfill
-  %\restoregeometry
-}
-
-
-\newenvironment{slidemaximus}[1][]{
-  \clearpage
-  \newgeometry{left=0.5cm,bottom=0.5cm,top=0.5cm,right=0.5cm}
-  \if\relax\detokenize{#1}\relax
-      
-  \else
-    \noindent{}
-    \slideheading{#1}
-  \fi
-  \vspace*{\fill}%
-  \par\noindent{}%
-}{
-  \vfill 
   \restoregeometry
 }
+
+
+\newenvironment{slide}[1][]
+{\begin{slidebase}[#1]{2cm} }
+{\end{slidebase}}
+
+
+\newenvironment{slidemaximus}[1][]
+{\begin{slidebase}[#1]{0.5cm} }
+{\end{slidebase}}
